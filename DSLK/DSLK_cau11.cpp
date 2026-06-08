@@ -1,0 +1,200 @@
+#include <stdio.h>
+#include <conio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+// 11. Đảo ngược toàn bộ danh sách liên kết đơn.
+typedef int Itemtype;
+struct SNode
+{
+    Itemtype Info;
+    SNode *Next;
+};
+struct SList
+{
+    SNode *Head;
+    SNode *Tail;
+};
+
+void initEmpty(SList *sl)
+{
+    sl->Head = NULL;
+    sl->Tail = NULL;
+}
+
+int isEmpty(SList *sl)
+{
+    return sl->Head == NULL ? 1 : 0;
+}
+
+SNode *createSNode(int x)
+{
+    SNode *p = new SNode();
+    if (p == NULL)
+        return NULL;
+    p->Info = x;
+    p->Next = NULL;
+    return p;
+}
+
+int insertTail(SList *sl, SNode *p)
+{
+    if (p == NULL)
+    {
+        return -1;
+    }
+    if (isEmpty(sl) == 1)
+    {
+        sl->Head = sl->Tail = p;
+        return 1;
+    }
+    else
+    {
+        sl->Tail->Next = p;
+        sl->Tail = p;
+    }
+    return 1;
+}
+
+void showSNode(SNode *p)
+{
+    printf("%d -> ", p->Info);
+}
+int deleteSNode_Head(SList *sl)
+{
+    SNode *p = sl->Head;
+    if (p == NULL)
+        return 0;
+    sl->Head = sl->Head->Next;
+    if (sl->Head == NULL)
+        sl->Tail = NULL;
+    int x = p->Info;
+    delete (p);
+    return x;
+}
+int deleteSNode_Tail(SList *sl)
+{
+    SNode *p = sl->Head;
+    if(p == NULL) return 0;
+    isEmpty(sl);
+    while (p->Next != sl->Tail)
+    {
+        p = p->Next;
+    }
+    sl->Tail = p;
+    p = p->Next;
+    int x = p->Info;
+    sl->Tail->Next = NULL;
+    delete(p);
+    return x;
+}
+void deleteAll(SList *sl)
+{
+    if (isEmpty(sl) == 1)return;
+    while (sl->Head != NULL)
+    {
+        deleteSNode_Head(sl);
+    }
+    sl->Tail = NULL;
+    printf("Delete all...");
+}
+void showSList(SList *sl)
+{
+    printf("Node: ");
+    for (SNode *p = sl->Head; p != NULL; p = p->Next)
+    {
+        showSNode(p);
+    }
+    printf("NULL");
+}
+void reverseList(SList *sl)
+{
+    SNode* prev = NULL;
+    SNode* cur = sl->Head;
+    SNode* next = NULL;
+    while(cur != NULL){
+        next = cur->Next;
+        cur->Next = prev;
+        prev = cur;
+        cur = next;
+    }
+    sl->Head = prev;
+}
+void createRandom(SList *sl, int &n)
+{
+    do
+    {
+        printf("Nhap so luong phan tu: ");
+        scanf("%d", &n);
+    } while (n <= 0);
+    srand((unsigned)time(NULL));
+    int i = 0;
+    while (i < n)
+    {
+        int x = rand() % 199 - 99;
+        SNode *tmp = createSNode(x);
+        insertTail(sl, tmp);
+        i++;
+    }
+}
+void createInputHand(SList* sl, int& n){
+    do{
+        printf("Nhap so luong phan tu: ");
+        scanf("%d", &n);
+
+    }while(n <= 0);
+    int x;
+    for(int i =0;i<n;i++){
+        printf("Nhap phan tu thu %d: ", i+1);
+        scanf("%d", &x);
+        SNode* p = createSNode(x);
+        insertTail(sl, p);
+    }
+}
+int main()
+{
+    int n;
+    SList sl;
+    initEmpty(&sl);
+    Itemtype x;
+    int lc;
+    do
+    {
+        printf("\nNhap lua chon: ");
+        scanf("%d", &lc);
+        switch (lc)
+        {
+        case 1:
+            printf("Nhap phan tu: ");
+            scanf("%d", &x);
+            insertTail(&sl, createSNode(x));
+            break;
+        case 2:
+            showSList(&sl);
+            break;
+        case 3:
+            createRandom(&sl, n);
+            break;
+        case 4:
+            reverseList(&sl);
+            showSList(&sl);
+            break;
+        case 5:
+            deleteSNode_Head(&sl);
+            break;
+        case 6:
+            deleteAll(&sl);
+            break;
+        case 7:
+            deleteSNode_Tail(&sl);
+            break;
+            case 8:
+            createInputHand(&sl, n);
+            break;
+        default:
+            break;
+        }
+    } while (lc != 0);
+
+    getch();
+}

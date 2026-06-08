@@ -1,0 +1,63 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Anh Khang\\Downloads\\Code\\Project1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7AAF033B-C082-4EBB-8B32-4763A42FDF31}|Project1.vcxproj|C:\\Users\\Anh Khang\\Downloads\\Code\\Project1\\search_binary.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7AAF033B-C082-4EBB-8B32-4763A42FDF31}|Project1.vcxproj|solutionrelative:search_binary.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7AAF033B-C082-4EBB-8B32-4763A42FDF31}|Project1.vcxproj|C:\\Users\\Anh Khang\\Downloads\\Code\\Project1\\search_linear.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7AAF033B-C082-4EBB-8B32-4763A42FDF31}|Project1.vcxproj|solutionrelative:search_linear.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "search_linear.cpp",
+              "DocumentMoniker": "C:\\Users\\Anh Khang\\Downloads\\Code\\Project1\\search_linear.cpp",
+              "RelativeDocumentMoniker": "search_linear.cpp",
+              "ToolTip": "C:\\Users\\Anh Khang\\Downloads\\Code\\Project1\\search_linear.cpp",
+              "RelativeToolTip": "search_linear.cpp",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-06-04T14:34:11.458Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "search_binary.cpp",
+              "DocumentMoniker": "C:\\Users\\Anh Khang\\Downloads\\Code\\Project1\\search_binary.cpp",
+              "RelativeDocumentMoniker": "search_binary.cpp",
+              "ToolTip": "C:\\Users\\Anh Khang\\Downloads\\Code\\Project1\\search_binary.cpp",
+              "RelativeToolTip": "search_binary.cpp",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-06-04T14:34:08.143Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
