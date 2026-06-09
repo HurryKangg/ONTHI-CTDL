@@ -150,11 +150,61 @@ void sortSListDiemTrungBinh(SList *sl)
 }
 void top3DTB(SNode *head)
 {
-    printf("3 SINH VIEN CO DIEM TRUNG BINH CAO NHAT:\n");
-    for (int i = 0; i < 3 && head != NULL; i++, head = head->Next)
+    Itemtype SV;
+    if (head == NULL || head->Next == NULL || head->Next->Next == NULL)
     {
-        printf("%s - %.2f\n", head->Info.ten, diemTrungBinh(&head->Info));
+        printf("Khong du 3 sinh vien ");
+        return;
     }
+    SNode *max1 = NULL;
+    SNode *max2 = NULL;
+    SNode *max3 = NULL;
+    for (SNode *p = head; p != NULL; p = p->Next)
+    {
+        float dtb = diemTrungBinh(&SV);
+        if (max1 == NULL || dtb > diemTrungBinh(&max1->Info))
+        {
+            max3 = max2;
+            max2 = max1;
+            max1 = p;
+        }
+        else if (max2 == NULL || dtb > diemTrungBinh(&max2->Info))
+        {
+            max3 = max2;
+            max2 = p;
+        }
+        else if (max3 == NULL || dtb > diemTrungBinh(&max3->Info))
+        {
+            max3 = p;
+        }
+    }
+    SNode *top[3] = {max1, max2, max3};
+    printf("3 SINH VIEN CO DIEM TRUNG BINH CAO NHAT:\n");
+    for (int i = 0; i < 3; i++)
+    {
+        show1SV(top[i]->Info);
+        printf("\n");
+    }
+}
+void top3SauKhiSapXep(SNode *head)
+{
+    int count = 0;
+    for (SNode *p = head; p != NULL && count < 3; p = p->Next)
+    {
+        show1SV(p->Info);
+        printf("\n");
+        count++;
+    }
+}
+void menu()
+{
+    printf("\nMENU");
+    printf("\n1. Them sinh vien");
+    printf("\n2. Hien thi danh sach");
+    printf("\n3. Tao danh sach");
+    printf("\n4. Sap xep");
+    printf("\n5. Top 3 Sinh Vien");
+    printf("\n0. Thoat");
 }
 int main()
 {
@@ -180,15 +230,12 @@ int main()
             createList(&sl, x);
             break;
         case 4:
-            printf("Diem trung binh cua sinh vien: %.2f\n", diemTrungBinh(&x));
-            break;
-        case 5:
             sortSListDiemTrungBinh(&sl);
             showSList(&sl);
             break;
-        case 6:
+        case 5:
             sortSListDiemTrungBinh(&sl);
-            top3DTB(sl.Head);
+            top3SauKhiSapXep(sl.Head);
             break;
         default:
             break;

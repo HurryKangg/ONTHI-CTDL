@@ -92,6 +92,38 @@ int tongCacNut(SList *sl)
     }
     return tong;
 }
+bool KTSoNguyenTo(int n)
+{
+    if (n < 2)
+        return false;
+    for (int i = 2; i <= sqrt(n); i++)
+    {
+        if (n % i == 0)
+            return false;
+    }
+    return true;
+}
+int tongNutSoNguyenTo(SList *sl)
+{
+    int tong = 0;
+    for (SNode *p = sl->Head; p != NULL; p = p->Next)
+    {
+        if (KTSoNguyenTo(p->Info))
+        {
+            tong += p->Info;
+        }
+    }
+    return tong;
+}
+void menu()
+{
+    printf("\nMENU");
+    printf("\n1. Them phan tu");
+    printf("\n2. Hien thi danh sach");
+    printf("\n3. Tinh tong so chinh phuong");
+    printf("\n4. Tinh tong so nguyen to");
+    printf("\n0. Thoat");
+}
 int main()
 {
     SList sl;
@@ -100,6 +132,7 @@ int main()
     int lc;
     do
     {
+        menu();
         printf("\nNhap lua chon: ");
         scanf("%d", &lc);
         switch (lc)
@@ -114,6 +147,9 @@ int main()
             break;
         case 3:
             printf("Tong so chinh phuong: %d", tongCacNut(&sl));
+            break;
+        case 4:
+            printf("Tong so nguyen to: %d", tongNutSoNguyenTo(&sl));
             break;
         default:
             break;

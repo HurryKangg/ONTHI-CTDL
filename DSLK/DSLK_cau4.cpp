@@ -82,8 +82,9 @@ int insertTail(SList *sl, Itemtype x)
     return 1;
 }
 
-float diemTrungBinh(Itemtype* x){
-    return (x->diemTL)*0.3 + (x->diemCK)*0.7;
+float diemTrungBinh(Itemtype *x)
+{
+    return (x->diemTL) * 0.3 + (x->diemCK) * 0.7;
 }
 
 void show1SV(Itemtype SV)
@@ -104,22 +105,31 @@ void showSList(SList *sl)
         show1SV(p->Info);
         printf("\n");
     }
-    
 }
 
-void createList(SList *sl, Itemtype x){
+void createList(SList *sl, Itemtype x)
+{
     int n;
-    do{
+    do
+    {
         printf("Nhap so luong sinh vien: ");
         scanf("%d", &n);
-    }while(n < 0);
-    for(int i = 0; i < n; i++){
+    } while (n < 0);
+    for (int i = 0; i < n; i++)
+    {
         printf("Sinh vien thu %d: \n", i + 1);
         inputSV(&x);
         insertTail(sl, x);
     }
 }
-
+void menu()
+{
+    printf("\nMENU");
+    printf("\n1. Them sinh vien");
+    printf("\n2. Hien thi danh sach");
+    printf("\n3. Tao danh sach");
+    printf("\n0. Thoat");
+}
 
 int main()
 {
@@ -129,6 +139,7 @@ int main()
     int lc;
     do
     {
+        menu();
         printf("\nNhap lua chon: ");
         scanf("%d", &lc);
         switch (lc)
@@ -142,9 +153,6 @@ int main()
             break;
         case 3:
             createList(&sl, x);
-            break;
-            case 4:
-            printf("Diem trung binh cua sinh vien: %.2f\n", diemTrungBinh(&x));
             break;
         default:
             break;

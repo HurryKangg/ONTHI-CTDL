@@ -148,6 +148,15 @@ void sortSListDiemTrungBinh(SList *sl)
         }
     }
 }
+void menu()
+{
+    printf("\nMENU");
+    printf("\n1. Them sinh vien");
+    printf("\n2. Hien thi danh sach");
+    printf("\n3. Tao danh sach");
+    printf("\n4. Sap xep");
+    printf("\n0. Thoat");
+}
 int main()
 {
     SList sl;
@@ -172,9 +181,6 @@ int main()
             createList(&sl, x);
             break;
         case 4:
-            printf("Diem trung binh cua sinh vien: %.2f\n", diemTrungBinh(&x));
-            break;
-        case 5:
             sortSListDiemTrungBinh(&sl);
             showSList(&sl);
             break;

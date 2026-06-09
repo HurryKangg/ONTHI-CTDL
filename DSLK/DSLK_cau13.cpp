@@ -90,10 +90,12 @@ float giaTri(Itemtype ps)
 {
     return (float)ps.tuso / ps.mauso;
 }
-void tongPS(SList *sl){
-    float sum =0;
-    SNode* p = sl->Head;
-    while(p != NULL){
+void tongPS(SList *sl)
+{
+    float sum = 0;
+    SNode *p = sl->Head;
+    while (p != NULL)
+    {
         sum += giaTri(p->Info);
         p = p->Next;
     }
@@ -104,12 +106,13 @@ void showSList(SList *sl)
     SNode *p = sl->Head;
     while (p != NULL)
     {
-        printf("%.2f    ",giaTri(p->Info));
+        printf("%.2f    ", giaTri(p->Info));
         p = p->Next;
     }
     printf("\n");
 }
-void danhSachLonHon1(SList *sl){
+void danhSachLonHon1(SList *sl)
+{
     printf("Cac phan so co gia tri lon hon 1: ");
     SNode *p = sl->Head;
     while (p != NULL)
@@ -122,6 +125,17 @@ void danhSachLonHon1(SList *sl){
     }
     printf("\n");
 }
+void menu()
+{
+    printf("\nMENU");
+    printf("\n1. Them phan tu");
+    printf("\n2. Hien thi danh sach");
+    printf("\n3. Tao phan tu");
+    printf("\n4. Tinh tong cac phan so");
+    printf("\n5. Hien thi cac phan so co gia tri lon hon 1");
+    printf("\n0. Thoat");
+}
+
 int main()
 {
     int n;
@@ -130,6 +144,7 @@ int main()
     int lc;
     do
     {
+        menu();
         printf("\nNhap lua chon: ");
         scanf("%d", &lc);
         switch (lc)
@@ -145,7 +160,7 @@ int main()
         case 3:
             tongPS(&sl);
             break;
-            case 4:
+        case 4:
             danhSachLonHon1(&sl);
             break;
         default:

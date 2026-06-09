@@ -2,7 +2,7 @@
 #include <conio.h>
 #include <math.h>
 #include <stdlib.h>
-//2. Đếm số lượng phần tử hiện có của DSLK.
+// 2. Đếm số lượng phần tử hiện có của DSLK.
 typedef int Itemtype;
 struct SNode
 {
@@ -69,14 +69,76 @@ void showSList(SList *sl)
     }
     printf("NULL");
 }
-int demPhanTu(SList* sl){
+int demPhanTu(SList *sl)
+{
     int count = 0;
-    SNode* p = sl->Head;
-    while(p != NULL){
+    SNode *p = sl->Head;
+    while (p != NULL)
+    {
         count++;
         p = p->Next;
     }
     return count;
+}
+bool KTSoChinhPhuong(int n)
+{
+    if (n < 0)
+        return false;
+    int can = sqrt(n);
+    while (can * can == n)
+    {
+        return true;
+    }
+    return false;
+}
+int demSoChinhPhuong(SList *sl)
+{
+    int count = 0;
+    SNode *p = sl->Head;
+    while (p != NULL)
+    {
+        if (KTSoChinhPhuong(p->Info))
+        {
+            count++;
+        }
+        p = p->Next;
+    }
+    return count;
+}
+bool KTSoNguyenTo(int n)
+{
+    if (n < 2)
+        return false;
+    for (int i = 2; i <= sqrt(n); i++)
+    {
+        if (n % i == 0)
+            return false;
+    }
+    return true;
+}
+int demSoNguyenTo(SList *sl)
+{
+    int count = 0;
+    SNode *p = sl->Head;
+    while (p != NULL)
+    {
+        if (KTSoNguyenTo(p->Info))
+        {
+            count++;
+        }
+        p = p->Next;
+    }
+    return count;
+}
+void menu()
+{
+    printf("\nMENU");
+    printf("\n1. Them phan tu");
+    printf("\n2. Hien thi danh sach");
+    printf("\n3. Dem so phan tu");
+    printf("\n4. Dem so chinh phuong");
+    printf("\n5. Dem so nguyen to");
+    printf("\n0. Thoat");
 }
 int main()
 {
@@ -86,6 +148,7 @@ int main()
     int lc;
     do
     {
+        menu();
         printf("\nNhap lua chon: ");
         scanf("%d", &lc);
         switch (lc)
@@ -100,6 +163,12 @@ int main()
             break;
         case 3:
             printf("So phan tu: %d", demPhanTu(&sl));
+            break;
+        case 4:
+            printf("So chinh phuong: %d", demSoChinhPhuong(&sl));
+            break;
+        case 5:
+            printf("So nguyen to: %d", demSoNguyenTo(&sl));
             break;
         default:
             break;

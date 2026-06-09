@@ -136,6 +136,17 @@ void createRandom(SList *sl, int &n)
         i++;
     }
 }
+void menu(){
+    printf("\nMENU");
+    printf("\n1. Them phan tu");
+    printf("\n2. Hien thi danh sach");
+    printf("\n3. Tao phan tu");
+    printf("\n4. Dem va nhan doi");
+    printf("\n5. Xoa dau");
+    printf("\n6. Xoa tat ca");
+    printf("\n7. Xoa cuoi");
+    printf("\n0. Thoat");
+}
 int main()
 {
     int n;
@@ -145,6 +156,7 @@ int main()
     int lc;
     do
     {
+        menu();
         printf("\nNhap lua chon: ");
         scanf("%d", &lc);
         switch (lc)
