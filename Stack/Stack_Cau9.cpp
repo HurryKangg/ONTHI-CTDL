@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-// 6. Chuyển cơ số: Dùng hàm push, pop đổi số nguyên dương n từ hệ thập phân sang hệ a phân bất kỳ (2  a  9).
-typedef int Itemtype;
+// 9. Đảo chuỗi: Viết hàm dùng Stack để đảo ngược thứ tự các từ trong một câu.
+typedef char Itemtype;
 struct StackNode
 {
     Itemtype Info;
@@ -61,6 +61,7 @@ int pop(Stack &s, Itemtype &x)
     StackNode *p = s.Top;
     if (isEmpty(s) == 1)
     {
+        printf("Bo nho rong\n");
         return 0;
     }
     s.Top = s.Top->Next;
@@ -89,36 +90,29 @@ void showStack(Stack &s)
     }
     printf("NULL");
 }
-void doiCoSo(int n, int a)
+void daoChuoi(char str[])
 {
-    int sodu, x, cn = n;
     Stack s;
     initEmpty(s);
-    while (n != 0)
+    for (int i = 0; str[i] != '\0'; i++)
     {
-        sodu = n % a;
-        n /= a;
-        push(s, createStack(sodu));
+        push(s, createStack(str[i]));
     }
-    printf("Ket qua: %d\n", cn);
+    int i = 0;
+    char x;
     while (isEmpty(s) == 0)
     {
         pop(s, x);
-        printf("%3d\n", x);
+        str[i++] = x;
     }
-    printf(" NULL");
 }
 int main()
 {
     Stack s;
     initEmpty(s);
-    // char str[] = "ANH KHANG";
-    int n, a;
-    printf("\nn = ");
-    scanf("%d", &n);
-    printf("\na = ");
-    scanf("%d", &a);
-    doiCoSo(n, a);
+    char str[] = "ANH KHANG";
+    daoChuoi(str);
+    printf("DAO CHUOI THANH: %s", str);
     return 0;
     getch();
 }

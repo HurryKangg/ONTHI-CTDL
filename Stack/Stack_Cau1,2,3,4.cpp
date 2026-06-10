@@ -3,6 +3,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
+#include <ctype.h>
 #include <string.h>
 // 1. Infix -> Postfix: Kẻ bảng chuyển đổi biểu thức M = ((3 + 5) - (6 / 2 - 1)) - 4 sang
 // hậu tố bằng Stack.
@@ -12,7 +13,7 @@
 // Stack.
 // 4. Tính Postfix: Kẻ bảng tính giá trị biểu thức hậu tố M = 1 5 * 3 - 2 3 + * 5 / bằng
 // Stack.
-typedef int Itemtype;
+typedef float Itemtype;
 struct StackNode
 {
     Itemtype Info;
@@ -68,7 +69,6 @@ int pop(Stack &s, Itemtype &x)
     StackNode *p = s.Top;
     if (isEmpty(s) == 1)
     {
-        printf("Bo nho rong\n");
         return 0;
     }
     s.Top = s.Top->Next;
@@ -77,7 +77,7 @@ int pop(Stack &s, Itemtype &x)
     return 1;
 }
 
-int getTop(Stack &s, int &x)
+int getTop(Stack &s, Itemtype &x)
 {
     if (isEmpty(s) == 1)
         return 0;
@@ -93,13 +93,13 @@ void showStack(Stack &s)
     printf("\nTop: \n");
     for (StackNode *p = s.Top; p != NULL; p = p->Next)
     {
-        printf("%d\n", p->Info);
+        printf("%f\n", p->Info);
     }
     printf("NULL");
 }
 int predence(char op)
 {
-    if (op == '(' || op == ')')
+    if (op == '(')
     {
         return 0;
     }
@@ -111,58 +111,130 @@ int predence(char op)
     {
         return 2;
     }
-    return -1;
+    return 3;
 }
-int infixToPostfix(char infix[], char postfix[])
+void infixToPostfix(char infix[], char postfix[])
 {
     Stack s;
     initEmpty(s);
     Itemtype x;
     char item;
-    int i = 0, j = 0;
-    for(int i =0; infix[i] != '0'; i++){
+    int j = 0;
+    for (int i = 0; infix[i] != '\0'; i++)
+    {
         item = infix[i];
+        if (isalnum(item))
+        {
+            postfix[j++] = item;
+            continue;
+        }
+        else
+        {
+            postfix[j++] = ' ';
+            if (item == '(')
+            {
+                push(s, createStack('('));
+            }
+            else
+            {
+                if (item == ')')
+                {
+                    while (pop(s, x) == 1 && x != '(')
+                    {
+                        postfix[j++] = x;
+                        postfix[j++] = ' ';
+                    }
+                }
+                else
+                {
+                    while (getTop(s, x) == 1 && predence(x) >= predence(item))
+                    {
+                        if (pop(s, x) == 1)
+                        {
+                            postfix[j++] = x;
+                            postfix[j++] = ' ';
+                        }
+                    }
+                    push(s, createStack(item));
+                }
+            }
+        }
     }
+    while (isEmpty(s) == 0)
+    {
+        if (pop(s, x) == 1)
+        {
+            postfix[j++] = ' ';
+            postfix[j++] = x;
+        }
+    }
+    postfix[j] = '\0';
+}
+float computeValue(char postfix[])
+{
+    Stack s;
+    initEmpty(s);
+    float kq;
+    Itemtype value1, value2;
+    char *p;
+    p = &postfix[0];
+    while (*p != '\0')
+    {
+        while (*p == ' ' || *p == '\t')
+        {
+            p++;
+        }
+        if (isdigit(*p))
+        {
+            int number = 0;
+            while (isdigit(*p))
+            {
+                number = number * 10 + *p - '0';
+                p++;
+            }
+            push(s, createStack(number));
+        }
+        else
+        {
+            pop(s, value1);
+            pop(s, value2);
+            switch (*p)
+            {
+            case '+':
+                kq = value2 + value1;
+                break;
+            case '-':
+                kq = value2 - value1;
+                break;
+            case '*':
+                kq = value2 * value1;
+                break;
+            case '/':
+                kq = value2 / value1;
+                break;
+            }
+            push(s, createStack(kq));
+        }
+        p++;
+    }
+    pop(s, kq);
+    return kq;
+}
+void stackComputeInfixPostfix(char str[])
+{
+    char postfix[100] = "";
+    float kq;
+    infixToPostfix(str, postfix);
+    printf("Bieu thuc Postfix: %s\n", postfix);
+    kq = computeValue(postfix);
+    printf("Gia tri cua bieu thuc: %.2f\n", kq);
 }
 int main()
 {
     Stack s;
-    StackNode *p;
     initEmpty(s);
-    Itemtype x, lc;
-    do
-    {
-        printf("\nLua chon: ");
-        scanf("%d", &lc);
-        switch (lc)
-        {
-        case 1:
-            printf("\nNhap phan tu: ");
-            scanf("%d", &x);
-            p = createStack(x);
-            push(s, p);
-            showStack(s);
-            break;
-        case 2:
-            pop(s, x);
-            showStack(s);
-            break;
-        case 3:
-            showStack(s);
-            break;
-        case 4:
-            int KT = getTop(s, x);
-            if (KT == 1)
-            {
-                printf("\nDINH DAU: %d", x);
-            }
-            else
-            {
-                printf("Khong co phan tu dinh dau");
-            }
-            break;
-        }
-    } while (lc != 0);
+    char str[] = "(2*3+8/2)*(5-1)";
+    stackComputeInfixPostfix(str);
     return 0;
     getch();
 }
