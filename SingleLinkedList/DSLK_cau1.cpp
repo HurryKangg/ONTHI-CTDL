@@ -2,7 +2,7 @@
 #include <conio.h>
 #include <math.h>
 #include <stdlib.h>
-// 2. Đếm số lượng phần tử hiện có của DSLK.
+// 1. Tính tổng các nút có giá trị là số chính phương trong DSLK.
 typedef int Itemtype;
 struct SNode
 {
@@ -69,17 +69,6 @@ void showSList(SList *sl)
     }
     printf("NULL");
 }
-int demPhanTu(SList *sl)
-{
-    int count = 0;
-    SNode *p = sl->Head;
-    while (p != NULL)
-    {
-        count++;
-        p = p->Next;
-    }
-    return count;
-}
 bool KTSoChinhPhuong(int n)
 {
     if (n < 0)
@@ -91,19 +80,17 @@ bool KTSoChinhPhuong(int n)
     }
     return false;
 }
-int demSoChinhPhuong(SList *sl)
+int tongCacNut(SList *sl)
 {
-    int count = 0;
-    SNode *p = sl->Head;
-    while (p != NULL)
+    int tong = 0;
+    for (SNode *p = sl->Head; p != NULL; p = p->Next)
     {
         if (KTSoChinhPhuong(p->Info))
         {
-            count++;
+            tong += p->Info;
         }
-        p = p->Next;
     }
-    return count;
+    return tong;
 }
 bool KTSoNguyenTo(int n)
 {
@@ -116,28 +103,55 @@ bool KTSoNguyenTo(int n)
     }
     return true;
 }
-int demSoNguyenTo(SList *sl)
+int tongNutSoNguyenTo(SList *sl)
 {
-    int count = 0;
-    SNode *p = sl->Head;
-    while (p != NULL)
+    int tong = 0;
+    for (SNode *p = sl->Head; p != NULL; p = p->Next)
     {
         if (KTSoNguyenTo(p->Info))
         {
-            count++;
+            tong += p->Info;
+        }
+    }
+    return tong;
+}
+int max(SList &sl)
+{
+    SNode *p = sl.Head;
+    int max = sl.Head->Info;
+    while (p != NULL)
+    {
+        if (p->Info > max)
+        {
+            max = p->Info;
         }
         p = p->Next;
     }
-    return count;
+    return max;
 }
+int min(SList &sl)
+{
+    SNode *p = sl.Head;
+    int min = sl.Head->Info;
+    while (p != NULL)
+    {
+        if (p->Info < min)
+        {
+            min = p->Info;
+        }
+        p = p->Next;
+    }
+    return min;
+}
+i
 void menu()
 {
     printf("\nMENU");
     printf("\n1. Them phan tu");
     printf("\n2. Hien thi danh sach");
-    printf("\n3. Dem so phan tu");
-    printf("\n4. Dem so chinh phuong");
-    printf("\n5. Dem so nguyen to");
+    printf("\n3. Tinh tong so chinh phuong");
+    printf("\n4. Tinh tong so nguyen to");
+    printf("\n5. Max/ Min");
     printf("\n0. Thoat");
 }
 int main()
@@ -162,13 +176,16 @@ int main()
             showSList(&sl);
             break;
         case 3:
-            printf("So phan tu: %d", demPhanTu(&sl));
+            printf("Tong so chinh phuong: %d", tongCacNut(&sl));
             break;
         case 4:
-            printf("So chinh phuong: %d", demSoChinhPhuong(&sl));
+            printf("Tong so nguyen to: %d", tongNutSoNguyenTo(&sl));
             break;
         case 5:
-            printf("So nguyen to: %d", demSoNguyenTo(&sl));
+            
+
+            printf("\nMAX: %d",max(sl));
+            printf("\nMIN: %d",min(sl));
             break;
         default:
             break;

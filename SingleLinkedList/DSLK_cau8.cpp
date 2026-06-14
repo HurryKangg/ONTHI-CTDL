@@ -75,7 +75,8 @@ int deleteSNode_Head(SList *sl)
 int deleteSNode_Tail(SList *sl)
 {
     SNode *p = sl->Head;
-    if(p == NULL) return 0;
+    if (p == NULL)
+        return 0;
     isEmpty(sl);
     while (p->Next != sl->Tail)
     {
@@ -85,12 +86,13 @@ int deleteSNode_Tail(SList *sl)
     p = p->Next;
     int x = p->Info;
     sl->Tail->Next = NULL;
-    delete(p);
+    delete (p);
     return x;
 }
 void deleteAll(SList *sl)
 {
-    if (isEmpty(sl) == 1)return;
+    if (isEmpty(sl) == 1)
+        return;
     while (sl->Head != NULL)
     {
         deleteSNode_Head(sl);
@@ -128,6 +130,25 @@ void tachDSLK(SList *sl, SList *sl_even, SList *sl_odd)
     printf("\nDanh sach so le ");
     showSList(sl_odd);
 }
+void countEvenAndOdd(SList &sl)
+{
+    int chan = 0, le = 0;
+    SNode *p = sl.Head;
+    while (p != NULL)
+    {
+        if (p->Info % 2 == 0)
+        {
+            chan++;
+        }
+        else
+        {                                                  
+            le++;
+        }
+        p = p->Next;
+    }
+    printf("\nSo luong chan: %d", chan);
+    printf("\nSo luong le: %d", le);
+}
 void createRandom(SList *sl, int &n)
 {
     do
@@ -155,6 +176,7 @@ void menu()
     printf("\n5. Xoa dau");
     printf("\n6. Xoa tat ca");
     printf("\n7. Xoa cuoi");
+    printf("\n8. Dem so luong chan le");
     printf("\n0. Thoat");
 }
 int main()
@@ -197,6 +219,9 @@ int main()
             break;
         case 7:
             deleteSNode_Tail(&sl);
+            break;
+        case 8:
+            countEvenAndOdd(sl);
             break;
         default:
             break;
