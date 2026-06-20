@@ -3,8 +3,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
-// 13.Lưu trữ phân số (tuSo, mauSo) trên DSLK và viết hàm tính tổng các phân số, In ra các phân số có giá trị lớn hơn 1.
-
+// 7. Lưu trữ đa thức P(x) = anxn + ... + a1x1 + a0. Viết hàm tính giá trị đa thức khi biết x
 struct donThuc
 {
     float heSo;
