@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 // 10.Viết hàm tính trung bình cộng của các phần tử có giá trị lớn hơn 10 trong DSLK.
-typedef int Itemtype;
+typedef float Itemtype;
 struct SNode
 {
     Itemtype Info;
@@ -27,7 +27,7 @@ int isEmpty(SList *sl)
     return sl->Head == NULL ? 1 : 0;
 }
 
-SNode *createSNode(int x)
+SNode *createSNode(float x)
 {
     SNode *p = new SNode();
     if (p == NULL)
@@ -58,9 +58,9 @@ int insertTail(SList *sl, SNode *p)
 
 void showSNode(SNode *p)
 {
-    printf("%d -> ", p->Info);
+    printf("%.2f -> ", p->Info);
 }
-int deleteSNode_Head(SList *sl)
+float deleteSNode_Head(SList *sl)
 {
     SNode *p = sl->Head;
     if (p == NULL)
@@ -68,11 +68,11 @@ int deleteSNode_Head(SList *sl)
     sl->Head = sl->Head->Next;
     if (sl->Head == NULL)
         sl->Tail = NULL;
-    int x = p->Info;
+    float x = p->Info;
     delete (p);
     return x;
 }
-int deleteSNode_Tail(SList *sl)
+float deleteSNode_Tail(SList *sl)
 {
     SNode *p = sl->Head;
     if(p == NULL) return 0;
@@ -83,7 +83,7 @@ int deleteSNode_Tail(SList *sl)
     }
     sl->Tail = p;
     p = p->Next;
-    int x = p->Info;
+    float x = p->Info;
     sl->Tail->Next = NULL;
     delete(p);
     return x;
@@ -110,7 +110,7 @@ void showSList(SList *sl)
 double tinhTrungBinhCong(SList *sl)
 {
     int count = 0;
-    double sum = 0;
+    int sum = 0;
     SNode* p = sl->Head;
     while(p != NULL){
         if(p->Info > 10){
@@ -119,7 +119,7 @@ double tinhTrungBinhCong(SList *sl)
         }
         p = p->Next;
     }
-    return count > 0 ? sum / count : 0;
+    return count > 0 ? sum*1.0 / count : 0.0f;
 }
 void createRandom(SList *sl, int &n)
 {
@@ -132,7 +132,7 @@ void createRandom(SList *sl, int &n)
     int i = 0;
     while (i < n)
     {
-        int x = rand() % 199 - 99;
+        float x = rand() % 199 - 99;
         SNode *tmp = createSNode(x);
         insertTail(sl, tmp);
         i++;
@@ -144,10 +144,10 @@ void createInputHand(SList* sl, int& n){
         scanf("%d", &n);
 
     }while(n <= 0);
-    int x;
+    float x;
     for(int i =0;i<n;i++){
         printf("Nhap phan tu thu %d: ", i+1);
-        scanf("%d", &x);
+        scanf("%f", &x);
         SNode* p = createSNode(x);
         insertTail(sl, p);
     }
@@ -182,7 +182,7 @@ int main()
         {
         case 1:
             printf("Nhap phan tu: ");
-            scanf("%d", &x);
+            scanf("%f", &x);
             insertTail(&sl, createSNode(x));
             break;
         case 2:

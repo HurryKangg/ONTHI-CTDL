@@ -147,21 +147,22 @@ int demSoNguyenTo(SList *sl)
     }
     return count;
 }
-int insertInputHand(SList &sl, SNode *x, int k)
+int insertInputHand(SList *sl, SNode *x, int k) 
 {
     if (x == NULL)
     {
         return -1;
     }
-    isEmpty(&sl);
-    int n = demPhanTu(&sl);
+
+    int n = demPhanTu(sl);
+
     if (k < 1 || k > n + 1)
         return -1;
     if (k == 1)
-        return insertHead(&sl, x);
+        return insertHead(sl, x);
     if (k == n + 1)
-        return insertTail(&sl, x);
-    SNode *p = sl.Head;
+        return insertTail(sl, x);
+    SNode *p = sl->Head;
     for (int i = 1; i < k - 1; i++)
     {
         p = p->Next;
@@ -170,6 +171,28 @@ int insertInputHand(SList &sl, SNode *x, int k)
     x->Next = z;
     p->Next = x;
     return 1;
+}
+int isHoanThien(int n)
+{
+    int sum = 0;
+    for (int i = 1; i <= n / 2; i++)
+    {
+        if (n % i == 0)
+            sum += i;
+    }
+    return sum == n;
+}
+void inSoHoanThien(SList *sl)
+{
+    SNode *p = sl->Head;
+    while (p != NULL)
+    {
+        if (isHoanThien(p->Info))
+        {
+            printf("%4d", p->Info);
+        }
+        p = p->Next;
+    }
 }
 void menu()
 {
@@ -180,6 +203,7 @@ void menu()
     printf("\n4. Dem so chinh phuong");
     printf("\n5. Dem so nguyen to");
     printf("\n6. Them phan tu tuy y");
+    printf("\n7. So hoan thien");
     printf("\n0. Thoat");
 }
 int main()
@@ -217,7 +241,7 @@ int main()
             scanf("%d", &x);
             printf("\nNhap vi tri them: ");
             scanf("%d", &k);
-            if (insertInputHand(sl, createSNode(x), k) == 1)
+            if (insertInputHand(&sl, createSNode(x), k) == 1)
             {
                 printf("\nDa them phan tu %d vao vi tri %d", x, k);
             }
@@ -225,6 +249,9 @@ int main()
             {
                 printf("\nThem that bai");
             }
+        case 7:
+            inSoHoanThien(&sl);
+            break;
         default:
             break;
         }

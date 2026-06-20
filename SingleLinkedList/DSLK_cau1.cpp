@@ -143,7 +143,6 @@ int min(SList &sl)
     }
     return min;
 }
-i
 void menu()
 {
     printf("\nMENU");
@@ -182,10 +181,8 @@ int main()
             printf("Tong so nguyen to: %d", tongNutSoNguyenTo(&sl));
             break;
         case 5:
-            
-
-            printf("\nMAX: %d",max(sl));
-            printf("\nMIN: %d",min(sl));
+            printf("\nMAX: %d", max(sl));
+            printf("\nMIN: %d", min(sl));
             break;
         default:
             break;
