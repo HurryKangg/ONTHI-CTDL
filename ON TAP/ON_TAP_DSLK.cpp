@@ -2,7 +2,7 @@
 #include <conio.h>
 #include <math.h>
 #include <stdlib.h>
-// 2. Đếm số lượng phần tử hiện có của DSLK.
+
 typedef int Itemtype;
 struct SNode
 {
