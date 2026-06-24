@@ -22,9 +22,9 @@ void selectionSort(int a[], int n)
                 min = j;
             }
         }
-        if (a[i] != a[min])
+        if (min != i)
         {
-            swap(a[i], a[min]);
+            swap(a[min], a[i]);
         }
     }
 }

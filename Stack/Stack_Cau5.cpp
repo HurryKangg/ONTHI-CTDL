@@ -61,7 +61,6 @@ int pop(Stack &s, Itemtype &x)
     StackNode *p = s.Top;
     if (isEmpty(s) == 1)
     {
-        printf("Bo nho rong\n");
         return 0;
     }
     s.Top = s.Top->Next;
@@ -90,7 +89,7 @@ void showStack(Stack &s)
     }
     printf("NULL");
 }
-int kiemTraDauNgoac(char str[])
+int kiemTraDauNgoac(const char str[])
 {
     Stack s;
     initEmpty(s);
@@ -111,9 +110,12 @@ int kiemTraDauNgoac(char str[])
         {
             if (pop(s, y) == 1)
             {
-                if (x == '(' && y != ')') return 0;
-                if (x == '[' && y != ']') return 0;
-                if (x == '{' && y != '}') return 0;
+                if (x == ')' && y != '(')
+                    return 0;
+                if (x == ']' && y != '[')
+                    return 0;
+                if (x == '}' && y != '{')
+                    return 0;
             }
             dong++;
         }
@@ -127,7 +129,7 @@ int main()
 {
     Stack s;
     initEmpty(s);
-    char str[] = "()]";
+    char str[] = "[()]";
     if (kiemTraDauNgoac(str) == 1)
     {
         printf("CHUOI HOP LE");

@@ -126,36 +126,23 @@ void showSList(SList *sl)
     }
     printf("NULL");
 }
-SList noiHaiDanhSachVao1DanhSach(SList *sl1, SList *sl2)
+void noiHaiDanhSachVao1DanhSach(SList *sl1, SList *sl2)
 {
-    SList sl;
-    initEmpty(&sl);
-    SNode *p = sl1->Head;
-    SNode *q = sl2->Head;
-    while (p != NULL && q != NULL)
+    /* Nối sl2 vào cuối sl1, không cấp phát node mới */
+
+    if (sl2->Head == NULL)
+        return;
+    if (sl1->Head == NULL)
     {
-        if (p->Info <= q->Info)
-        {
-            insertTail(&sl, createSNode(p->Info));
-            p = p->Next;
-        }
-        else
-        {
-            insertTail(&sl, createSNode(q->Info));
-            q = q->Next;
-        }
+        sl1->Head = sl2->Head;
+        sl1->Tail = sl2->Tail;
     }
-    while (p != NULL)
+    else
     {
-        insertTail(&sl, createSNode(p->Info));
-        p = p->Next;
+        sl1->Tail->Next = sl2->Head;
+        sl1->Tail = sl2->Tail;
     }
-    while (q != NULL)
-    {
-        insertTail(&sl, createSNode(q->Info));
-        q = q->Next;
-    }
-    return sl;
+    sl2->Head = sl2->Tail = NULL; /* tránh hai danh sách cùng quản lý một chuỗi node */
 }
 void createRandom(SList *sl, int &n)
 {
@@ -192,7 +179,8 @@ void createInputHand(SList *sl, int &n)
     }
 }
 
-void menu(){
+void menu()
+{
     printf("\nMENU");
     printf("\n1. Them phan tu");
     printf("\n2. Hien thi danh sach");
@@ -238,8 +226,8 @@ int main()
             printf("Nhap phan tu cho danh sach 1 va 2:\n");
             createInputHand(&sl1, n);
             createInputHand(&sl2, n);
-            sl = noiHaiDanhSachVao1DanhSach(&sl1, &sl2);
-            showSList(&sl);
+            noiHaiDanhSachVao1DanhSach(&sl1, &sl2);
+            showSList(&sl1);
             break;
         case 5:
             deleteSNode_Head(&sl);

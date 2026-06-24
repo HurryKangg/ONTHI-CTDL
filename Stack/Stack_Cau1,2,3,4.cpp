@@ -233,7 +233,7 @@ int main()
 {
     Stack s;
     initEmpty(s);
-    char str[] = "1+2*(3+2)";
+    char str[] = "(2 * 3 - 4 + 2) / (4 - 2)";
     stackComputeInfixPostfix(str);
     return 0;
     getch();

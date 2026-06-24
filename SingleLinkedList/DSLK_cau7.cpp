@@ -85,14 +85,14 @@ void inDaThuc(SList &sl)
 }
 float tinhDaThuc(SList &sl, float x0)
 {
-    int kq = 0;
+    float kq = 0.0f;
     SNode *p = sl.Head;
     while (p != NULL)
     {
-        kq += p->Info.heSo * pow(x0 * 1.0, p->Info.soMu);
+        kq += p->Info.heSo * (float)pow((double)x0, p->Info.soMu);
         p = p->Next;
     }
-    return kq * 1.0;
+    return kq;
 }
 void menu()
 {

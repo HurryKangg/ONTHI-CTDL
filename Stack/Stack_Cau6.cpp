@@ -100,13 +100,12 @@ void doiCoSo(int n, int a)
         n /= a;
         push(s, createStack(sodu));
     }
-    printf("Ket qua: %d\n", cn);
+    printf("Ket qua: %ld", cn);
     while (isEmpty(s) == 0)
     {
         pop(s, x);
-        printf("%3d\n", x);
+        printf("%3d", x);
     }
-    printf(" NULL");
 }
 int main()
 {

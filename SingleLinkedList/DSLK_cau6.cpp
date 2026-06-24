@@ -85,7 +85,7 @@ int insertTail(SList *sl, Itemtype x)
 
 float diemTrungBinh(Itemtype *x)
 {
-    return x->diemGK * 0.2 + x->diemTL * 0.3 + x->diemCK * 0.5;
+    return x->diemGK * 0.2f + x->diemTL * 0.3f + x->diemCK * 0.5f;
 }
 
 void show1SV(Itemtype SV)
@@ -148,48 +148,11 @@ void sortSListDiemTrungBinh(SList *sl)
         }
     }
 }
-void top3DTB(SNode *head)
+void top3SauKhiSapXep(SList &sl)
 {
-    Itemtype SV;
-    if (head == NULL || head->Next == NULL || head->Next->Next == NULL)
-    {
-        printf("Khong du 3 sinh vien ");
-        return;
-    }
-    SNode *max1 = NULL;
-    SNode *max2 = NULL;
-    SNode *max3 = NULL;
-    for (SNode *p = head; p != NULL; p = p->Next)
-    {
-        float dtb = diemTrungBinh(&SV);
-        if (max1 == NULL || dtb > diemTrungBinh(&max1->Info))
-        {
-            max3 = max2;
-            max2 = max1;
-            max1 = p;
-        }
-        else if (max2 == NULL || dtb > diemTrungBinh(&max2->Info))
-        {
-            max3 = max2;
-            max2 = p;
-        }
-        else if (max3 == NULL || dtb > diemTrungBinh(&max3->Info))
-        {
-            max3 = p;
-        }
-    }
-    SNode *top[3] = {max1, max2, max3};
-    printf("3 SINH VIEN CO DIEM TRUNG BINH CAO NHAT:\n");
-    for (int i = 0; i < 3; i++)
-    {
-        show1SV(top[i]->Info);
-        printf("\n");
-    }
-}
-void top3SauKhiSapXep(SNode *head)
-{
+    sortSListDiemTrungBinh(&sl);
     int count = 0;
-    for (SNode *p = head; p != NULL && count < 3; p = p->Next)
+    for (SNode *p = sl.Head; p != NULL && count < 3; p = p->Next)
     {
         show1SV(p->Info);
         printf("\n");
@@ -234,8 +197,7 @@ int main()
             showSList(&sl);
             break;
         case 5:
-            sortSListDiemTrungBinh(&sl);
-            top3SauKhiSapXep(sl.Head);
+            top3SauKhiSapXep(sl);
             break;
         default:
             break;

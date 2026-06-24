@@ -147,7 +147,7 @@ int demSoNguyenTo(SList *sl)
     }
     return count;
 }
-int insertInputHand(SList *sl, SNode *x, int k) 
+int insertInputHand(SList *sl, SNode *x, int k)
 {
     if (x == NULL)
     {
@@ -178,9 +178,11 @@ int isHoanThien(int n)
     for (int i = 1; i <= n / 2; i++)
     {
         if (n % i == 0)
+        {
             sum += i;
+        }
     }
-    return sum == n;
+    return sum == n ? 1 : 0;
 }
 void inSoHoanThien(SList *sl)
 {
@@ -194,6 +196,7 @@ void inSoHoanThien(SList *sl)
         p = p->Next;
     }
 }
+
 void menu()
 {
     printf("\nMENU");
@@ -204,13 +207,14 @@ void menu()
     printf("\n5. Dem so nguyen to");
     printf("\n6. Them phan tu tuy y");
     printf("\n7. So hoan thien");
+    printf("\n8. Am duong xen ke");
     printf("\n0. Thoat");
 }
 int main()
 {
     SList sl;
     initEmpty(&sl);
-    Itemtype x, k;
+    Itemtype x, k, kq;
     int lc;
     do
     {
@@ -249,6 +253,7 @@ int main()
             {
                 printf("\nThem that bai");
             }
+            break;
         case 7:
             inSoHoanThien(&sl);
             break;
