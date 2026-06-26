@@ -170,7 +170,7 @@ int demPhanTu(SList *sl)
     }
     return count;
 }
-int tongPhanTu(SList &sl)
+int tongPhanTu(SList sl)
 {
     int tong = 0;
     SNode *p = sl.Head;
@@ -182,7 +182,7 @@ int tongPhanTu(SList &sl)
     return tong;
 }
 // 2.Tính tổng/đếm số chẵn/lẻ/âm/dương các phần tử DSLK đơn
-int demAm(SList &sl)
+int demAm(SList sl)
 {
     int count = 0;
     SNode *p = sl.Head;
@@ -196,7 +196,7 @@ int demAm(SList &sl)
     }
     return count;
 }
-int demDuong(SList &sl)
+int demDuong(SList sl)
 {
     int count = 0;
     SNode *p = sl.Head;
@@ -210,7 +210,7 @@ int demDuong(SList &sl)
     }
     return count;
 }
-int demChan(SList &sl)
+int demChan(SList sl)
 {
     int count = 0;
     SNode *p = sl.Head;
@@ -224,7 +224,7 @@ int demChan(SList &sl)
     }
     return count;
 }
-int demLe(SList &sl)
+int demLe(SList sl)
 {
     int count = 0;
     SNode *p = sl.Head;
@@ -239,7 +239,7 @@ int demLe(SList &sl)
     return count;
 }
 // 3. Kiểm tra mảng toàn chẵn/lẻ/âm/dương trong DSLK
-int kiemTraMangToanChan(SList &sl)
+int kiemTraMangToanChan(SList sl)
 {
     if (isEmpty(&sl) == 1)
         return 0;
@@ -254,7 +254,7 @@ int kiemTraMangToanChan(SList &sl)
     }
     return 1;
 }
-int kiemTraMangToanLe(SList &sl)
+int kiemTraMangToanLe(SList sl)
 {
     if (isEmpty(&sl) == 1)
         return 0;
@@ -269,7 +269,7 @@ int kiemTraMangToanLe(SList &sl)
     }
     return 1;
 }
-int kiemTraMangToanAm(SList &sl)
+int kiemTraMangToanAm(SList sl)
 {
     if (isEmpty(&sl) == 1)
         return 0;
@@ -284,7 +284,7 @@ int kiemTraMangToanAm(SList &sl)
     }
     return 1;
 }
-int kiemTraMangToanDuong(SList &sl)
+int kiemTraMangToanDuong(SList sl)
 {
     if (isEmpty(&sl) == 1)
         return 0;
@@ -364,11 +364,11 @@ float tbCongPhanTuLe(SList &sl)
     return count > 0 ? sum * 1.0 / count : 0.0f;
 }
 // 6. Tìm max/min trong danh sách liên kết
-int max(SList &sl)
+int max(SList sl)
 {
     if (isEmpty(&sl) == 1)
         return 0;
-    int max = sl.Head->Info;
+    int max = 0;
     SNode *p = sl.Head;
     while (p != NULL)
     {
@@ -380,11 +380,11 @@ int max(SList &sl)
     }
     return max;
 }
-int min(SList &sl)
+int min(SList sl)
 {
     if (isEmpty(&sl) == 1)
         return 0;
-    int min = sl.Head->Info;
+    int min = 0;
     SNode *p = sl.Head;
     while (p != NULL)
     {
@@ -543,6 +543,9 @@ int main()
     insertTail(&sl, createSNode(7));
 
     showSList(&sl);
+    printf("\nMax: %d", max(sl));
+    
+    printf("\nMin: %d", min(sl));
 
     printf("\nSo phan tu: %d", demPhanTu(&sl));
 
